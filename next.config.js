@@ -7,7 +7,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Remove any webpack customizations that may cause issues
+  // Disable features that might be causing CSS processing issues
+  experimental: {
+    // Disable experimental features related to CSS
+    optimizeCss: false
+  },
+  // Don't customize webpack config
   swcMinify: true,
   output: 'standalone'
 }

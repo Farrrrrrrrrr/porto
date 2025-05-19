@@ -1,15 +1,9 @@
-/* Most basic version of Tailwind imports */
+/* Basic styles only */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Simple base styles without complex animations */
 body {
   color: white;
   background-color: black;
-}
-
-/* Simple helper classes without animations */
-.bg-gradient {
-  background: linear-gradient(to right, #6366f1, #8b5cf6, #d946ef);
 }
