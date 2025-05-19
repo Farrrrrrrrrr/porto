@@ -3,6 +3,5 @@
   "installCommand": "npm install",
   "buildCommand": "npm install tailwindcss postcss autoprefixer --no-save && npm run build",
   "devCommand": "npm run dev",
-  "outputDirectory": ".next",
-  "output": "standalone"
+  "outputDirectory": ".next"
 }
