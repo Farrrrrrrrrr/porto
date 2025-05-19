@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 1234567..abcdefg 100644
+--- a/package.json
++++ b/package.json
+@@ -33,7 +33,7 @@
+     "@types/three": ">=0.126.0",
+     "@use-gesture/react": ">=10.2.0",
+     "its-fine": ">=1.0.0",
+-    "react": "^19.0.0",
++    "react": ">=18.0.0",
+     "suspend-react": ">=0.1.0",
+     "three": ">=0.126.0",
+     "three-stdlib": ">=2.0.0"
