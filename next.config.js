@@ -7,42 +7,43 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  swcMinify: true,
-  output: 'standalone',
+  // Disable PostCSS processing to troubleshoot build issues
   experimental: {
-    optimizeCss: true, // This enables CSS optimization
+    esmExternals: true
   },
   webpack: (config) => {
-    // Simplify CSS processing
-    const rules = config.module.rules;
-    const cssRule = rules.find(rule => rule.oneOf && rule.oneOf.some(r => r.test && r.test.toString().includes('css')));
-    
-    if (cssRule && cssRule.oneOf) {
-      cssRule.oneOf.forEach(rule => {
-        if (rule.use && Array.isArray(rule.use)) {
-          rule.use.forEach(u => {
-            if (u.loader && u.loader.includes('css-loader')) {
-              // Simplify CSS options
-              u.options = {
-                ...u.options,
-                importLoaders: 1
-              };
-            }
-            if (u.loader && u.loader.includes('postcss-loader')) {
-              // Use simple PostCSS config
-              u.options = {
-                postcssOptions: {
-                  plugins: ['tailwindcss', 'autoprefixer']
-                }
-              };
-            }
-          });
-        }
-      });
-    }
+    // Force CSS resolution
+    config.module.rules.forEach((rule) => {
+      const { oneOf } = rule;
+      if (oneOf) {
+        oneOf.forEach((one) => {
+          if (!one.issuer && one.use && one.use.length > 0) {
+            one.use.forEach((u) => {
+              if (u.loader && u.loader.includes('css-loader') && !u.loader.includes('postcss-loader')) {
+                u.options = {
+                  ...u.options,
+                  importLoaders: 1,
+                };
+              }
+              if (u.loader && u.loader.includes('postcss-loader')) {
+                u.options = {
+                  ...u.options,
+                  postcssOptions: {
+                    plugins: [
+                      require('tailwindcss'),
+                      require('autoprefixer'),
+                    ],
+                  },
+                };
+              }
+            });
+          }
+        });
+      }
+    });
     
     return config;
   },
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig

@@ -1,54 +1,15 @@
+/* Most basic version of Tailwind imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-}
-
+/* Simple base styles without complex animations */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  color: white;
+  background-color: black;
 }
 
-/* Simple animations */
-@keyframes ping-slow {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 0.4; }
-  100% { transform: scale(1); opacity: 0.8; }
-}
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-
-.animate-ping-slow {
-  animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
-}
-
-.animation-reverse {
-  animation-direction: reverse;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
+/* Simple helper classes without animations */
+.bg-gradient {
+  background: linear-gradient(to right, #6366f1, #8b5cf6, #d946ef);
 }
