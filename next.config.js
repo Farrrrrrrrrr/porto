@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['three'],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -11,18 +10,11 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  webpack: (config) => {
-    // Exclude client-only modules from SSR
-    config.resolve.fallback = {
-      fs: false,
-      path: false,
-      os: false,
-    };
-
-    return config;
-  },
-  // Disable CSS modules to simplify build
-  cssModules: false,
+  output: 'standalone',
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ['three']
+  }
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig
