@@ -1,11 +1,5 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "buildCommand": "npm run vercel-build",
+  "buildCommand": "NODE_OPTIONS=--max_old_space_size=4096 npm install --legacy-peer-deps three @react-three/fiber @react-three/drei && npm run build",
   "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "npm run dev",
   "framework": "nextjs",
