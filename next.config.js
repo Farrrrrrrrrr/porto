@@ -11,16 +11,20 @@ const nextConfig = {
     // Same for TypeScript errors
     ignoreBuildErrors: true,
   },
-  images: {
-    domains: ['localhost'],
-  },
   experimental: {
     // This will allow Next.js to attempt more aggressive optimizations
     optimizeFonts: true,
-    optimizePackageImports: ['three', '@react-three/fiber', '@react-three/drei'],
   },
-  // For Vercel deployments, ensure proper asset handling
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
+  webpack: (config) => {
+    // This is to handle the peer dependency mismatch
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Force using the same React version for @react-three/fiber
+      'react': require.resolve('react'),
+      'react-dom': require.resolve('react-dom')
+    };
+    return config;
+  },
 };
 
 module.exports = nextConfig;
