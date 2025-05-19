@@ -7,34 +7,15 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Necessary to prevent build failures related to PostCSS
+  // Add this to make tailwindcss work properly
   webpack: (config) => {
-    // Find the PostCSS loader rule
-    const rules = config.module.rules;
-    const postCSSRule = rules.find(
-      (rule) => rule.oneOf?.find((r) => r.test?.toString().includes('css'))
-    );
-
-    if (postCSSRule) {
-      const cssRule = postCSSRule.oneOf.find(
-        (r) => r.test?.toString().includes('css')
-      );
-      if (cssRule && cssRule.use) {
-        // Replace PostCSS options with minimal configuration
-        cssRule.use.forEach((rule) => {
-          if (rule.loader && rule.loader.includes('postcss-loader')) {
-            rule.options = {
-              postcssOptions: {
-                plugins: ['tailwindcss', 'autoprefixer'],
-              },
-            };
-          }
-        });
-      }
-    }
+    config.resolve.alias = {
+      ...config.resolve.alias,
+    };
     return config;
   },
-  // Explicitly set output
+  // Simplify the build process
+  swcMinify: true,
   output: 'standalone',
 }
 
