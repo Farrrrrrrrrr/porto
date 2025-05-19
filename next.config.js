@@ -7,11 +7,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Remove the direct require of tailwindcss
-  webpack: (config) => {
-    return config;
-  },
-  // Simplify the build process
+  // Remove any webpack customizations that may cause issues
   swcMinify: true,
   output: 'standalone'
 }
