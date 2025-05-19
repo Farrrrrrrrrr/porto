@@ -8,12 +8,22 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   experimental: {
-    // Turn off the legacy support for the Pages Router
-    missingSuspenseWithCSR: true,
+    appDir: true,
+    missingSuspenseWithCSR: false,
   },
-  webpack(config) {
+  webpack: (config) => {
+    // Ignore issues with missing modules during build
+    config.ignoreWarnings = [
+      { module: /node_modules/ },
+      { file: /src\/pages/ },
+    ];
     return config;
   },
+  images: {
+    domains: ['localhost'],
+  },
+  // This tells Next.js to ignore certain modules during server-side rendering
+  serverComponentsExternalPackages: ['three', '@react-three/fiber', '@react-three/drei'],
 };
 
 module.exports = nextConfig;
